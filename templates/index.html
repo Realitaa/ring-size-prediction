@@ -79,35 +79,44 @@
                             <!-- Result or selection feedback -->
                             <div id="file-name" class="text-sm font-medium text-pink-600 mt-2 h-5"></div>
                             
-                            <pre id="result" class="mt-4 text-sm text-gray-700 bg-white/50 backdrop-blur rounded-xl p-4 hidden border border-gray-100 shadow-inner whitespace-pre-wrap max-h-64 overflow-y-auto"></pre>
+                            <div id="result" class="mt-4 text-sm text-gray-700 bg-white/50 backdrop-blur rounded-xl p-4 hidden border border-gray-100 shadow-inner max-h-64 overflow-y-auto"></div>
                         </form>
                     </div>
                 </div>
 
-                <!-- Right Column: Splide Carousel -->
+                <!-- Right Column: Splide Carousel OR Image Preview -->
                 <div class="relative w-full max-w-lg mx-auto lg:ml-auto mt-12 lg:mt-0">
                     <!-- Decorative blob behind carousel -->
                     <div class="absolute -inset-4 bg-gradient-to-r from-pink-300 to-blue-300 rounded-[2.5rem] blur-2xl opacity-40"></div>
                     
-                    <div class="splide bg-white/40 backdrop-blur-xl rounded-[2.5rem] shadow-2xl p-4 border border-white/50 relative" id="hero-slider">
-                        <div class="splide__track rounded-3xl overflow-hidden">
-                            <ul class="splide__list">
-                                <li class="splide__slide">
-                                    <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-inner">
-                                        <img src="/static/img/hand_with_rings_1776140325520.png" class="object-cover w-full h-full" alt="Hand with rings">
-                                    </div>
-                                </li>
-                                <li class="splide__slide">
-                                    <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-inner">
-                                        <img src="/static/img/hand_scanning_1776140375361.png" class="object-cover w-full h-full" alt="Hand Scanning Interface">
-                                    </div>
-                                </li>
-                                <li class="splide__slide">
-                                    <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-inner">
-                                        <img src="/static/img/floating_rings_1776140354425.png" class="object-cover w-full h-full" alt="Floating Rings Design">
-                                    </div>
-                                </li>
-                            </ul>
+                    <div class="bg-white/40 backdrop-blur-xl rounded-[2.5rem] shadow-2xl p-4 border border-white/50 relative">
+                        
+                        <!-- Default view: Carousel -->
+                        <div class="splide" id="hero-slider">
+                            <div class="splide__track rounded-3xl overflow-hidden shadow-inner">
+                                <ul class="splide__list">
+                                    <li class="splide__slide">
+                                        <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden">
+                                            <img src="/static/img/hand_with_rings_1776140325520.png" class="object-cover w-full h-full" alt="Hand with rings">
+                                        </div>
+                                    </li>
+                                    <li class="splide__slide">
+                                        <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden">
+                                            <img src="/static/img/hand_scanning_1776140375361.png" class="object-cover w-full h-full" alt="Hand Scanning Interface">
+                                        </div>
+                                    </li>
+                                    <li class="splide__slide">
+                                        <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden">
+                                            <img src="/static/img/floating_rings_1776140354425.png" class="object-cover w-full h-full" alt="Floating Rings Design">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Uploaded View: Image Preview -->
+                        <div id="image-preview-container" class="hidden relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-inner bg-gray-100 flex items-center justify-center">
+                            <img id="image-preview" src="" class="object-contain w-full h-full" alt="Uploaded Image Preview">
                         </div>
                     </div>
                 </div>

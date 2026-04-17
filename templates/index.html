@@ -95,6 +95,16 @@
                             <!-- Hidden File Input -->
                             <input type="file" id="imageInput" name="image" accept="image/*" class="hidden">
                             
+                            <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-xl text-sm text-yellow-800">
+                                <strong>Tips:</strong>
+                                <ul class="list-disc ml-5 mt-2 space-y-1">
+                                    <li>Gunakan koin sebagai referensi ukuran</li>
+                                    <li>Ambil foto dari atas (top view)</li>
+                                    <li>Pastikan pencahayaan cukup</li>
+                                    <li>Jari tidak terpotong dan tidak blur</li>
+                                </ul>
+                            </div>
+
                              <div class="flex flex-wrap gap-4">
                                 <!-- Custom Label Acting as Button -->
                                 <label for="imageInput" class="cursor-pointer inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-gray-900 dark:bg-pink-600 rounded-2xl hover:bg-gray-800 dark:hover:bg-pink-500 focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 dark:focus:ring-pink-500 shadow-lg hover:shadow-xl hover:-translate-y-1">
@@ -117,7 +127,7 @@
                             <!-- Result or selection feedback -->
                             <div id="file-name" class="text-sm font-medium text-pink-600 dark:text-pink-400 mt-2 h-5"></div>
                             
-                            <div id="result" class="mt-4 text-sm text-gray-700 dark:text-gray-300 bg-white/50 dark:bg-slate-900/50 backdrop-blur rounded-xl p-4 hidden border border-gray-100 dark:border-slate-800 shadow-inner max-h-64 overflow-y-auto transition-colors"></div>
+                            <div id="result" class="mt-4 text-sm text-gray-700 dark:text-gray-300 bg-white/50 dark:bg-slate-900/50 backdrop-blur rounded-xl p-4 hidden border border-gray-100 dark:border-slate-800 shadow-inner transition-colors"></div>
                         </form>
                     </div>
                 </div>
@@ -173,6 +183,7 @@
     <script src="/static/js/splidejs.js"></script>
 
     <!-- Application JS -->
+    <script src="/static/js/table.js"></script>
     <script src="/static/js/app.js"></script>
     <script src="/static/js/themeToggle.js"></script>
 </body>

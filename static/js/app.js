@@ -46,11 +46,25 @@ form.addEventListener("submit", async (e) => {
         progressText.textContent = "Selesai";
 
         if (data.success) {
+            const size = data.data.ring_size;
+            const diameter = data.data.diameter_mm;
+
             resultDisplay.innerHTML = `
-                <div class="text-emerald-500 dark:text-emerald-400 font-bold mb-2">Deteksi Berhasil!</div>
-                <div class="dark:text-gray-200">Ukuran Cincin yang Disarankan: <span class="font-bold text-xl">${data.data.ring_size}</span></div>
-                <div class="text-gray-600 dark:text-gray-400 text-sm">Diameter Jari Terukur: ${data.data.diameter_mm} mm</div>
-                <div class="text-gray-600 dark:text-gray-400 text-sm">Diameter Referensi Cincin: ${data.data.reference_mm} mm</div>
+                <div style="color: #10B981; font-weight: bold; margin-bottom: 8px;">
+                    Deteksi Berhasil!
+                </div>
+
+                <div>Ukuran Cincin: 
+                    <span style="font-weight: bold; font-size: 1.25rem;">
+                        ${size}
+                    </span>
+                </div>
+
+                <div>Diameter Jari: ${diameter} mm</div>
+
+                ${renderWarning(diameter)}
+                ${renderRecommendation(size)}
+                ${renderTable()}
             `;
         } else {
             resultDisplay.innerHTML = `

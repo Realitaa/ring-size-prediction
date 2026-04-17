@@ -47,7 +47,7 @@ def process_image_opencv(file_bytes):
     )
 
     if circles is None:
-        raise ValueError("Koin tidak terdeteksi")
+        raise ValueError("COIN_NOT_DETECTED")
 
     circles = np.uint16(np.around(circles))
     coin_diameter_pixel = 2 * circles[0][0][2]
@@ -65,7 +65,7 @@ def process_image_opencv(file_bytes):
     candidates = [c for c in contours if cv2.contourArea(c) > 2000]
 
     if not candidates:
-        raise ValueError("Tangan tidak terdeteksi")
+        raise ValueError("FINGER_NOT_DETECTED")
 
     largest = max(candidates, key=cv2.contourArea)
 
@@ -95,7 +95,7 @@ def process_image_opencv(file_bytes):
             widths.append(width)
 
     if not widths:
-        raise ValueError("Lebar jari tidak ditemukan")
+        raise ValueError("FINGER_WIDTH_NOT_FOUND")
 
     finger_width_pixel = int(np.median(widths))
 

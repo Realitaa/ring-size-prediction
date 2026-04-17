@@ -20,5 +20,6 @@ def process_image(request):
     except Exception as e:
         return Response({
             "success": False,
-            "error": str(e)
+            "error": str(e), 
+            "code": str(e)  
         }, status=500)

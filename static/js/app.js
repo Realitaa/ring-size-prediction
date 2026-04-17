@@ -67,15 +67,57 @@ form.addEventListener("submit", async (e) => {
                 ${renderTable()}
             `;
         } else {
-            resultDisplay.innerHTML = `
-                <div class="text-red-500 dark:text-red-400 font-bold mb-2">Gagal Menganalisis</div>
-                <div class="whitespace-pre-wrap text-gray-700 dark:text-gray-300">${data.error}</div>
-            `;
+            resultDisplay.innerHTML = renderError(data.error);
         }
     } catch (err) {
-        resultDisplay.innerHTML = `
-            <div class="text-red-500 dark:text-red-400 font-bold mb-2">Kesalahan Sistem</div>
-            <div class="text-gray-700 dark:text-gray-300">Terjadi masalah jaringan atau server: ${err.message}</div>
-        `;
+        resultDisplay.innerHTML = renderError(err.message);
     }
 });
+
+function classifyError(code) {
+    switch(code) {
+        case "COIN_NOT_DETECTED":
+            return "coin";
+        case "FINGER_NOT_DETECTED":
+        case "FINGER_WIDTH_NOT_FOUND":
+            return "finger";
+        default:
+            return "unknown";
+    }
+}
+
+function renderError(errorMsg) {
+    const type = classifyError(errorMsg);
+
+    if (type === "coin") {
+        return `
+        <div class="p-4 bg-red-50 border border-red-200 rounded-xl">
+            <div class="font-semibold text-red-700 mb-2">❌ Koin Tidak Terdeteksi</div>
+            <ul class="text-sm text-red-600 list-disc ml-5 space-y-1">
+                <li>Pastikan koin terlihat jelas di foto</li>
+                <li>Gunakan pencahayaan yang cukup</li>
+                <li>Jangan gunakan koin yang terlalu kecil / tertutup</li>
+            </ul>
+        </div>
+        `;
+    }
+
+    if (type === "finger") {
+        return `
+        <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
+            <div class="font-semibold text-yellow-700 mb-2">⚠️ Jari Tidak Terdeteksi</div>
+            <ul class="text-sm text-yellow-700 list-disc ml-5 space-y-1">
+                <li>Pastikan seluruh jari terlihat</li>
+                <li>Gunakan background kontras</li>
+                <li>Hindari bayangan berlebih</li>
+            </ul>
+        </div>
+        `;
+    }
+
+    return `
+    <div class="p-4 bg-gray-100 border rounded-xl text-sm text-gray-700">
+        Terjadi kesalahan: ${errorMsg}
+    </div>
+    `;
+}

@@ -1,15 +1,15 @@
 const ringTable = [
-  { us: 4, mm: 14.1, eu: 44 },
-  { us: 5, mm: 14.9, eu: 47 },
-  { us: 6, mm: 15.7, eu: 49 },
-  { us: 7, mm: 16.5, eu: 52 },
-  { us: 8, mm: 17.3, eu: 54 },
-  { us: 9, mm: 18.1, eu: 57 },
-  { us: 10, mm: 19.0, eu: 59 },
-  { us: 11, mm: 19.8, eu: 62 },
-  { us: 12, mm: 20.6, eu: 64 },
-  { us: 13, mm: 21.4, eu: 67 },
-  { us: 14, mm: 22.2, eu: 70 }
+  { us: 4, mm: 14.9, eu: 47 },
+  { us: 5, mm: 15.7, eu: 49 },
+  { us: 6, mm: 16.5, eu: 52 },
+  { us: 7, mm: 17.3, eu: 54 },
+  { us: 8, mm: 18.2, eu: 57 },
+  { us: 9, mm: 19.0, eu: 60 },
+  { us: 10, mm: 19.8, eu: 62 },
+  { us: 11, mm: 20.7, eu: 65 },
+  { us: 12, mm: 21.5, eu: 68 },
+  { us: 13, mm: 22.3, eu: 70 },
+  { us: 14, mm: 23.1, eu: 73 }
 ];
 
 function renderTable() {

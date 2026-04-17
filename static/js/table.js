@@ -39,6 +39,7 @@ function renderTable() {
 }
 
 function getRecommendations(size) {
+  size = parseInt(size);
     return {
         down: size - 1,
         normal: size,

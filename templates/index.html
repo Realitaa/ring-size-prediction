@@ -88,6 +88,34 @@
                     <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-lg transition-colors">
                         Ukur cincin Anda dengan presisi tinggi menggunakan foto tangan. Sistem ini memanfaatkan teknologi AI modern untuk mendeteksi landmark tangan dan menghitung ukuran cincin secara instan menggunakan pendekatan integral.
                     </p>
+
+                    <div class="flex gap-2 mb-4">
+                        <button id="aiModeBtn" class="px-4 py-2 bg-gray-900 dark:bg-pink-600 text-white rounded-lg transition-colors">AI Mode</button>
+                        <button id="manualModeBtn" class="px-4 py-2 bg-gray-200 dark:bg-slate-700 text-gray-800 dark:text-gray-200 rounded-lg transition-colors hover:bg-gray-300 dark:hover:bg-slate-600">Manual Mode</button>
+                    </div>
+
+                    <div id="manualContainer" class="hidden mt-4">
+                        <div class="bg-white/60 dark:bg-slate-900/60 backdrop-blur p-4 rounded-xl border border-gray-100 dark:border-slate-800 transition-colors">
+                            
+                            <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                            Masukkan Diameter Jari (mm)
+                            </label>
+
+                            <input 
+                            type="number" 
+                            id="manualDiameter"
+                            placeholder="Contoh: 17.5"
+                            class="w-full p-3 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-lg mb-3 focus:ring-2 focus:ring-pink-500 transition-colors"
+                            />
+
+                            <button id="manualSubmit"
+                            class="w-full bg-pink-500 hover:bg-pink-600 text-white py-2 rounded-lg transition-colors shadow-md">
+                            Hitung Ukuran
+                            </button>
+
+                        </div>
+                    </div>
+
                     
                     <div class="pt-4">
                         <!-- Keep original form structure but stylized -->
@@ -127,8 +155,11 @@
                             <!-- Result or selection feedback -->
                             <div id="file-name" class="text-sm font-medium text-pink-600 dark:text-pink-400 mt-2 h-5"></div>
                             
-                            <div id="result" class="mt-4 text-sm text-gray-700 dark:text-gray-300 bg-white/50 dark:bg-slate-900/50 backdrop-blur rounded-xl p-4 hidden border border-gray-100 dark:border-slate-800 shadow-inner transition-colors"></div>
                         </form>
+                        
+                        <!-- Unified Result Container -->
+                        <div id="result" class="mt-4 text-sm text-gray-700 dark:text-gray-300 bg-white/50 dark:bg-slate-900/50 backdrop-blur rounded-xl p-4 hidden border border-gray-100 dark:border-slate-800 shadow-inner transition-colors"></div>
+
                     </div>
                 </div>
 

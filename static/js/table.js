@@ -47,18 +47,76 @@ function getRecommendations(size) {
     };
 }
 
-function renderRecommendation(size) {
+function renderRecommendation(size, diameter) {
     const rec = getRecommendations(size);
+    const floatDiameter = parseFloat(diameter);
+    
+    // Scale based on the full ringTable range
+    const minMm = ringTable[0].mm; // 14.1
+    const maxMm = ringTable[ringTable.length - 1].mm; // 22.2
+    
+    // Use slightly wider bounds for better padding
+    const chartMin = 14; 
+    const chartMax = 23;
+    const range = chartMax - chartMin;
+    const percentage = ((floatDiameter - chartMin) / range) * 100;
 
     return `
-    <div class="mt-4 p-4 bg-blue-50 dark:bg-blue-500/10 rounded-2xl border border-blue-100 dark:border-blue-500/20 shadow-sm transition-colors">
-      <div class="font-semibold mb-2 text-blue-900 dark:text-blue-300">Rekomendasi Ukuran</div>
-      <div class="text-sm text-blue-800 dark:text-blue-200/80 flex justify-between items-center">
-        <span>Lebih kecil: <b class="text-blue-900 dark:text-blue-200">${rec.down}</b></span>
-        <span class="w-px h-3 bg-blue-200 dark:bg-blue-800"></span>
-        <span>Pas: <b class="text-blue-900 dark:text-blue-200 text-lg">${rec.normal}</b></span>
-        <span class="w-px h-3 bg-blue-200 dark:bg-blue-800"></span>
-        <span>Lebih longgar: <b class="text-blue-900 dark:text-blue-200">${rec.up}</b></span>
+    <div class="mt-4 p-5 bg-[#ddeff3] dark:bg-[#ddeff3]/10 rounded-2xl border border-[#ddeff3] dark:border-[#ddeff3]/20 shadow-sm transition-colors overflow-hidden">
+      
+      <!-- Comparison Chart -->
+      <div class="mb-8 pt-2">
+        <div class="flex justify-between text-[10px] font-bold text-blue-600/70 dark:text-blue-400/70 mb-2.5 px-0.5 uppercase tracking-tighter">
+          <span>14mm</span>
+          <span>16mm</span>
+          <span>18mm</span>
+          <span>20mm</span>
+          <span>22mm</span>
+          <span>24mm</span>
+        </div>
+        
+        <div class="relative h-2 bg-blue-100/30 dark:bg-slate-800 rounded-full border border-blue-200/50 dark:border-blue-800/50 transition-colors">
+          <!-- Reference Marks (Full Range) -->
+          <div class="absolute inset-x-0 inset-y-0 flex justify-between px-[1px]">
+            ${[14, 16, 18, 20, 22, 24].map(() => `<div class="w-px bg-blue-200 dark:bg-blue-800/50 h-full"></div>`).join("")}
+          </div>
+          
+          <!-- User Marker -->
+          <div class="absolute top-0 bottom-0 -translate-x-1/2 transition-all duration-700 ease-out" style="left: ${percentage}%">
+            <!-- Vertical Indicator Line -->
+            <div class="h-full w-0.5 bg-blue-600 dark:bg-blue-400 mx-auto"></div>
+            
+            <!-- Tooltip/Arrow -->
+            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-1 flex flex-col items-center">
+              <div class="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[6px] border-b-blue-600 dark:border-b-blue-400"></div>
+              <div class="mt-0.5 px-2 py-0.5 bg-blue-600 dark:bg-blue-500 text-white text-[10px] font-bold rounded-full shadow-lg whitespace-nowrap">
+                Ukuran kamu: ${floatDiameter.toFixed(1)} mm
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="font-semibold mb-3 text-blue-900 dark:text-blue-300 flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+        Rekomendasi Ukuran
+      </div>
+      
+      <div class="text-sm text-blue-800 dark:text-blue-200/80 flex justify-between items-center bg-white/40 dark:bg-slate-900/40 backdrop-blur-sm p-3 rounded-xl border border-blue-100/50 dark:border-blue-900/30">
+        <div class="flex flex-col items-center flex-1">
+          <span class="text-[10px] uppercase tracking-wider opacity-60 mb-0.5">Lebih kecil</span>
+          <b class="text-blue-900 dark:text-blue-200 text-base">${rec.down}</b>
+        </div>
+        <div class="w-px h-8 bg-blue-200/50 dark:bg-blue-800/50"></div>
+        <div class="flex flex-col items-center flex-1">
+          <span class="text-[10px] uppercase tracking-wider opacity-60 mb-0.5">Pas (Rekomendasi)</span>
+          <b class="text-blue-600 dark:text-blue-400 text-2xl leading-none">${rec.normal}</b>
+        </div>
+        <div class="w-px h-8 bg-blue-200/50 dark:bg-blue-800/50"></div>
+        <div class="flex flex-col items-center flex-1">
+          <span class="text-[10px] uppercase tracking-wider opacity-60 mb-0.5">Lebih longgar</span>
+          <b class="text-blue-900 dark:text-blue-200 text-base">${rec.up}</b>
+        </div>
       </div>
     </div>
     `;
@@ -84,7 +142,6 @@ function renderWarning(diameter) {
 
     return `
     <div class="mt-4 p-4 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-2xl text-sm text-red-700 dark:text-red-300 shadow-sm flex items-start gap-3 transition-colors">
-      <span class="text-lg leading-none">⚠️</span>
       <div class="leading-relaxed">${warning}</div>
     </div>
     `;
